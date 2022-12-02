@@ -1,0 +1,47 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.board {
+  width: min(80vh, 80vw);
+  height: min(80vh, 80vw);
+  display: grid;
+  grid-template: repeat(5, 1fr) / repeat(5, 1fr);
+  gap: 4px;
+}
+
+.tile {
+  background-color: white;
+  aspect-ratio: 1;
+  width: auto;
+  color: black;
+  font-size: 0.65rem;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.tile:hover {
+  background-color: lightblue;
+}
+
+.tileSelected {
+  background-color: blue;
+}
+
+.tileSelected:hover {
+  background-color: red;
+}
+
+.tileContent {
+  width: fit-content;
+  height: fit-content;
+  display: block;
+}
