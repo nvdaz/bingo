@@ -7,8 +7,8 @@
 }
 
 .board {
-  width: min(80vh, 80vw);
-  height: min(80vh, 80vw);
+  width: 80vmin;
+  height: 80vmin;
   display: grid;
   grid-template: repeat(5, 1fr) / repeat(5, 1fr);
   gap: 2px;
@@ -31,7 +31,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  text-overflow: ellipsis;
+  overflow: hidden;
   background-color: #242424;
   color: #ffffff;
 
@@ -58,11 +58,12 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  text-overflow: ellipsis;
 }
 
 .star {
   display: block;
-  width: 8px;
-  height: 8px;
+  width: 1vmin;
+  height: 1vmin;
   margin: 0 0 0 auto;
 }
