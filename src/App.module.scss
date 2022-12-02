@@ -11,14 +11,19 @@
   height: min(80vh, 80vw);
   display: grid;
   grid-template: repeat(5, 1fr) / repeat(5, 1fr);
-  gap: 4px;
+  gap: 2px;
+  border: 2px solid #ffffff;
+  background-color: #ffffff;
+
+  @media (prefers-color-scheme: light) {
+    border: 2px solid #242424;
+    background-color: #242424;
+  }
 }
 
 .tile {
-  background-color: white;
   aspect-ratio: 1;
   width: auto;
-  color: black;
   font-size: 0.65rem;
   cursor: pointer;
   padding: 4px;
@@ -26,6 +31,14 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  text-overflow: ellipsis;
+  background-color: #242424;
+  color: #ffffff;
+
+  @media (prefers-color-scheme: light) {
+    background-color: #ffffff;
+    color: #242424;
+  }
 }
 
 .tile:hover {
