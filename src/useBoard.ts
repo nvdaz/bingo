@@ -7,24 +7,21 @@ function quote() {
 
 interface Tile {
   quote: string;
+  rarity: number;
   selected: boolean;
 }
 
 export default function useBoard() {
   const [board, setBoard] = useState<Tile[]>(
-    [...Array(25)].map(() => ({ quote: quote(), selected: false }))
+    [...Array(25)].map(() => ({ ...quote(), selected: false }))
   );
-
-  useEffect(() => {
-    setBoard((tiles) => tiles.map(() => ({ quote: quote(), selected: false })));
-  }, []);
 
   const select = useCallback(
     (index: number) => {
       setBoard((tiles) =>
-        tiles.map(({ quote, selected }, i) => ({
-          quote,
+        tiles.map(({ selected, ...rest }, i) => ({
           selected: i === index ? !selected : selected,
+          ...rest,
         }))
       );
     },
