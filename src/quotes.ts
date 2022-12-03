@@ -10,14 +10,16 @@ export const modules = import.meta.glob<QuoteModule>('./quotes/*.mdx', {
   eager: true,
 });
 
-export const quotes = Object.keys(modules).map((key) => ({
-  key,
-  rarity: modules[key].rarity,
+export const quotes = Object.keys(modules).map((module) => ({
+  key: module.match(/\.([^.]+)\.mdx/)![1],
+  module,
+  rarity: modules[module].rarity,
 }));
 
-export type Quote = {
+export type QuoteDescriptor = {
   key: string;
-  rarity: string;
+  module: string;
+  rarity: number;
 };
 
 export default quotes;

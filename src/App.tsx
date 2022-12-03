@@ -1,19 +1,27 @@
+import ReactGA from 'react-ga';
 import classNames from './App.module.scss';
 import useBoard from './useBoard';
 import QuoteTile from './QuoteTile';
 import Quote from './Quote';
 import { useCallback, useState } from 'react';
+import { QuoteDescriptor } from './quotes';
 
 function App() {
-  const [open, setOpen] = useState<string>();
+  const [open, setOpen] = useState<QuoteDescriptor>();
   const { board, select } = useBoard();
 
   const onSelect = useCallback(() => {
-    select(open!);
+    select(open!.key);
     setOpen(undefined);
   }, [open, setOpen]);
   const onClose = useCallback(() => setOpen(undefined), [setOpen]);
-  const onClick = useCallback((key: string) => setOpen(key), [setOpen]);
+  const onClick = useCallback(
+    (quote: QuoteDescriptor) => {
+      ReactGA.pageview(quote.key);
+      setOpen(quote);
+    },
+    [setOpen]
+  );
 
   return (
     <div className={classNames.container}>
@@ -21,7 +29,7 @@ function App() {
       <div className={classNames.board}>
         {board.map((quote, i) => (
           <QuoteTile
-            quote={quote.key}
+            quote={quote}
             selected={quote.selected}
             key={i}
             onClick={onClick}

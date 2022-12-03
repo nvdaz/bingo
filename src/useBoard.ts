@@ -7,7 +7,9 @@ function quote() {
 
 interface Tile {
   key: string;
+  module: string;
   selected: boolean;
+  rarity: number;
 }
 
 export default function useBoard() {

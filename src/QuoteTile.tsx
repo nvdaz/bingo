@@ -1,14 +1,14 @@
 import clsx from 'clsx';
-import { modules } from './quotes';
+import { modules, QuoteDescriptor } from './quotes';
 import classNames from './QuoteTile.module.scss';
 import { ReactComponent as Star } from './assets/star.svg';
 import { rarityColor } from './rarity';
 import { useCallback } from 'react';
 
 interface QuoteTileProps {
-  quote: string;
+  quote: QuoteDescriptor;
   selected: boolean;
-  onClick: (key: string) => void;
+  onClick: (quote: QuoteDescriptor) => void;
 }
 
 export default function QuoteTile({
@@ -16,7 +16,7 @@ export default function QuoteTile({
   selected,
   onClick,
 }: QuoteTileProps) {
-  const mod = modules[quote];
+  const mod = modules[quote.module];
   if (!mod) {
     throw new Error('quote module not found');
   }

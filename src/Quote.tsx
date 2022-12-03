@@ -1,4 +1,4 @@
-import { modules } from './quotes';
+import { modules, QuoteDescriptor } from './quotes';
 import classNames from './Quote.module.scss';
 import { ReactComponent as Star } from './assets/star.svg';
 import { rarityColor, rarityName } from './rarity';
@@ -6,13 +6,13 @@ import { MouseEvent, useCallback, useRef } from 'react';
 import clsx from 'clsx';
 
 interface QuoteProps {
-  quote: string;
+  quote: QuoteDescriptor;
   onSelect: () => void;
   onClose: () => void;
 }
 
 export default function Quote({ quote, onSelect, onClose }: QuoteProps) {
-  const mod = modules[quote];
+  const mod = modules[quote.module];
   if (!mod) {
     throw new Error('quote module not found');
   }
