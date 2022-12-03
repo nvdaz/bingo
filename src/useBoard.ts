@@ -1,26 +1,26 @@
 import { useCallback, useEffect, useState } from 'react';
-import quotes from './quotes.json';
+import quotes from './quotes';
 
 function quote() {
   return quotes[Math.floor(Math.random() * quotes.length)];
 }
 
 interface Tile {
-  quote: string;
-  rarity: number;
+  key: string;
   selected: boolean;
 }
 
 export default function useBoard() {
   const [board, setBoard] = useState<Tile[]>(
-    [...Array(25)].map(() => ({ ...quote(), selected: false }))
+    [...Array(25)].map(() => ({ quote: 'a', ...quote(), selected: false }))
   );
 
   const select = useCallback(
-    (index: number) => {
+    (k: string) => {
       setBoard((tiles) =>
-        tiles.map(({ selected, ...rest }, i) => ({
-          selected: i === index ? !selected : selected,
+        tiles.map(({ key, selected, ...rest }) => ({
+          key,
+          selected: k === key ? !selected : selected,
           ...rest,
         }))
       );

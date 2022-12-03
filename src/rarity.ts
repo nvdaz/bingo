@@ -3,10 +3,12 @@ import ColorScale from 'color-scales';
 type Rarity = 'COMMON' | 'UNCOMMON' | 'RARE' | 'EPIC' | 'LEGENDARY';
 
 const rarityColorScale = new ColorScale(0, 1, [
-  '#f6f6f6',
-  '#abcaff',
+  '#a4a4a4',
+  '#a4a4a4',
+  '#1eff00',
+  '#0070dd',
   '#a63fff',
-  '#ff8330',
+  '#ff4040',
   '#ff4040',
 ]);
 

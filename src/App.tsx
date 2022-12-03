@@ -1,32 +1,31 @@
-import clsx from 'clsx';
 import classNames from './App.module.scss';
 import useBoard from './useBoard';
-import { ReactComponent as Star } from './assets/star.svg';
-import { rarityColor } from './rarity';
+import QuoteTile from './QuoteTile';
+import Quote from './Quote';
+import { useCallback, useState } from 'react';
 
 function App() {
+  const [open, setOpen] = useState<string>();
   const { board, select } = useBoard();
-  console.log(board);
+
+  const onSelect = useCallback(() => {
+    select(open!);
+    setOpen(undefined);
+  }, [open, setOpen]);
+  const onClose = useCallback(() => setOpen(undefined), [setOpen]);
+  const onClick = useCallback((key: string) => setOpen(key), [setOpen]);
+
   return (
     <div className={classNames.container}>
+      {open && <Quote quote={open} onClose={onClose} onSelect={onSelect} />}
       <div className={classNames.board}>
-        {board.map(({ quote, rarity, selected }, i) => (
-          <div
+        {board.map((quote, i) => (
+          <QuoteTile
+            quote={quote.key}
+            selected={quote.selected}
             key={i}
-            className={clsx(
-              classNames.tile,
-              selected && classNames.tileSelected
-            )}
-            onClick={() => select(i)}
-          >
-            <div className={classNames.tileContent}>
-              <Star
-                className={classNames.star}
-                style={{ fill: rarityColor(rarity) }}
-              ></Star>
-              {quote}
-            </div>
-          </div>
+            onClick={onClick}
+          />
         ))}
       </div>
     </div>
