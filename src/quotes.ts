@@ -23,12 +23,16 @@ const keys = Array.from(quotes.keys());
 
 export function createBoard() {
   const tiles: (string | null)[] = [];
+  let available = [...keys];
 
   for (let i = 0; i < 25; i++) {
     if (i === 12) {
       tiles.push(null);
     } else {
-      tiles.push(keys[Math.floor(Math.random() * keys.length)]);
+      const n = Math.floor(Math.random() * available.length);
+      const quote = available[n];
+      tiles.push(quote);
+      available = available.filter((q) => q !== quote);
     }
   }
   return tiles;
