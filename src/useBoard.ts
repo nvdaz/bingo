@@ -1,34 +1,34 @@
-import { useCallback, useState } from 'react';
-import quotes from './quotes';
-
-function quote() {
-  return quotes[Math.floor(Math.random() * quotes.length)];
-}
-
-interface Tile {
-  key: string;
-  module: string;
-  selected: boolean;
-  rarity: number;
-}
+import { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectTiles, selectWeek, setTiles } from './features/boardSlice';
+import { createBoard } from './quotes';
+import currentWeek from './week';
 
 export default function useBoard() {
-  const [board, setBoard] = useState<Tile[]>(
-    [...Array(25)].map(() => ({ quote: 'a', ...quote(), selected: false }))
-  );
+  const dispatch = useDispatch();
+  const tiles = useSelector(selectTiles);
+  const week = useSelector(selectWeek);
 
-  const select = useCallback(
-    (k: string) => {
-      setBoard((tiles) =>
-        tiles.map(({ key, selected, ...rest }) => ({
-          key,
-          selected: k === key ? !selected : selected,
-          ...rest,
-        }))
-      );
-    },
-    [setBoard]
-  );
+  const resetBoard = useCallback(() => {
+    dispatch(setTiles(createBoard()));
+  }, []);
 
-  return { board, select };
+  const checkWeek = useCallback(() => {
+    if (week < currentWeek()) {
+      resetBoard();
+    }
+  }, [week]);
+
+  useEffect(() => {
+    if (tiles === null) {
+      resetBoard();
+    }
+
+    checkWeek();
+    const interval = setInterval(() => checkWeek, 10000);
+
+    return () => clearInterval(interval);
+  }, [tiles]);
+
+  return tiles || [];
 }

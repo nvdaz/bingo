@@ -6,20 +6,30 @@ export type QuoteModule = {
   short: string;
 };
 
-export const modules = import.meta.glob<QuoteModule>('./quotes/*.mdx', {
+const modules = import.meta.glob<QuoteModule>('./quotes/*.mdx', {
   eager: true,
 });
 
-export const quotes = Object.keys(modules).map((module) => ({
-  key: module.match(/\.([^.]+)\.mdx/)![1],
-  module,
-  rarity: modules[module].rarity,
-}));
+const quotes = new Map<string, QuoteModule>();
 
-export type QuoteDescriptor = {
-  key: string;
-  module: string;
-  rarity: number;
-};
+for (const [path, value] of Object.entries(modules)) {
+  const key = path.match(/\.\/quotes\/([^.]+)\.mdx/)![1];
+  quotes.set(key, value);
+}
 
 export default quotes;
+
+const keys = Array.from(quotes.keys());
+
+export function createBoard() {
+  const tiles: (string | null)[] = [];
+
+  for (let i = 0; i < 25; i++) {
+    if (i === 12) {
+      tiles.push(null);
+    } else {
+      tiles.push(keys[Math.floor(Math.random() * keys.length)]);
+    }
+  }
+  return tiles;
+}
