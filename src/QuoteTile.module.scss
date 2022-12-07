@@ -26,6 +26,7 @@
 
 .tileSelected {
   background-color: #7878e2;
+  color: white;
 
   &:hover.tileSelectable {
     background-color: #d67b7b;
@@ -40,6 +41,7 @@
     #6f6fec 10px,
     #6f6fec 20px
   );
+  color: white;
 }
 
 .tileContent {
