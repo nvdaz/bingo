@@ -11,6 +11,7 @@ export default function useBingoEffect(effect: EffectCallback) {
       setLastBingos(bingos);
       return;
     }
+    setLastBingos(bingos);
 
     if (bingos <= lastBingos) {
       return;
