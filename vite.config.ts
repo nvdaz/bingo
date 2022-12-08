@@ -7,6 +7,7 @@ import { execSync } from 'child_process';
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 import pkg from './package.json';
+import manifest from './manifest.json';
 
 const version = pkg.version;
 const revision = execSync('git describe --long --always --dirty=-dirty')
@@ -19,7 +20,7 @@ process.env.VITE_VERSION = `v${version}.${revision}`;
 export default defineConfig({
   plugins: [
     react(),
-    VitePWA({ registerType: 'autoUpdate' }),
+    VitePWA({ registerType: 'autoUpdate', manifest }),
     svgr(),
     mdx({ remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter] }),
   ],
