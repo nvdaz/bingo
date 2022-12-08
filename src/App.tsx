@@ -4,6 +4,7 @@ import QuoteTile from './QuoteTile';
 import Quote from './Quote';
 import { useCallback, useState } from 'react';
 import useBoard from './useBoard';
+import Confetti from './Confetti';
 
 function App() {
   const [open, setOpen] = useState<string>();
@@ -20,6 +21,7 @@ function App() {
 
   return (
     <div className={classNames.container}>
+      <Confetti />
       {open && <Quote quote={open} onClose={onClose} />}
       <div className={classNames.board}>
         {tiles.map((quote, i) => (
