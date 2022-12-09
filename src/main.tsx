@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import ReactGA from 'react-ga';
 import store from './store';
-import App from './App';
+import App from './components/App';
 import './web-vitals';
 import './index.scss';
 

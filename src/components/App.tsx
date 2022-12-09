@@ -3,8 +3,8 @@ import classNames from './App.module.scss';
 import QuoteTile from './QuoteTile';
 import Quote from './Quote';
 import { useCallback, useState } from 'react';
-import useBoard from './useBoard';
-import Confetti from './Confetti';
+import useBoard from '../useBoard';
+import Confetti from '../Confetti';
 
 function App() {
   const [open, setOpen] = useState<string>();

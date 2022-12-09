@@ -1,11 +1,11 @@
 import clsx from 'clsx';
-import quotes from './quotes';
+import quotes from '../quotes';
 import classNames from './QuoteTile.module.scss';
-import { ReactComponent as Star } from './assets/star.svg';
-import { rarityColor } from './rarity';
+import { ReactComponent as Star } from '../assets/star.svg';
+import { rarityColor } from '../rarity';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { selectSelected } from './features/boardSlice';
+import { selectSelected } from '../features/boardSlice';
 
 interface QuoteTileProps {
   quote: string | null;

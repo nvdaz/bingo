@@ -1,14 +1,14 @@
-import quotes from './quotes';
+import quotes from '../quotes';
 import classNames from './Quote.module.scss';
-import { ReactComponent as Star } from './assets/star.svg';
-import { rarityColor, rarityName } from './rarity';
+import { ReactComponent as Star } from '../assets/star.svg';
+import { rarityColor, rarityName } from '../rarity';
 import { MouseEvent, useCallback, useMemo, useRef } from 'react';
 import clsx from 'clsx';
 import {
   deselectTile,
   selectSelected,
   selectTile,
-} from './features/boardSlice';
+} from '../features/boardSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 interface QuoteProps {
