@@ -3,6 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import currentWeek from '../week';
 import { isBingo } from '../logic';
+import { startOfWeek } from 'date-fns';
 
 interface BoardState {
   tiles: (string | null)[] | null;
@@ -25,7 +26,8 @@ export const boardSlice = createSlice({
     setTiles: (state, action: PayloadAction<(string | null)[]>) => {
       state.tiles = action.payload;
       state.bingos = isBingo(action.payload, state.selected);
-      state.week = currentWeek();
+      state.week = startOfWeek(Date.now()).getTime();
+      state.selected = [];
     },
     selectTile: (state, action: PayloadAction<string>) => {
       state.selected.push(action.payload);

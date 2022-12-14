@@ -1,8 +1,8 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { startOfWeek } from 'date-fns';
 import { selectTiles, selectWeek, setTiles } from './features/boardSlice';
 import { createBoard } from './quotes';
-import currentWeek from './week';
 
 export default function useBoard() {
   const dispatch = useDispatch();
@@ -14,7 +14,8 @@ export default function useBoard() {
   }, []);
 
   const checkWeek = useCallback(() => {
-    if (week < currentWeek()) {
+    const currentWeek = startOfWeek(Date.now()).getTime();
+    if (week < currentWeek) {
       resetBoard();
     }
   }, [week]);
